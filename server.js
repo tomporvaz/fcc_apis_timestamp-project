@@ -25,10 +25,10 @@ app.get("/api/hello", function (req, res) {
 });
 
 //timestamp api endpoint
-app.get("/:date_string?",
+app.get("/timestamp/:date_string?",
   function (req, res){
     const date = new Date(req.params.date_string);
-    res.json({miliseconds: Date.parse(date), dateToString: date.toUTCString()})
+    res.json({"unix": Date.parse(date), "utc": date.toUTCString()})
   }  
 );
 
