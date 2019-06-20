@@ -27,18 +27,24 @@ app.get("/api/hello", function (req, res) {
 //timestamp api endpoint
 app.get("/timestamp/:date_string?",
   function (req, res){
-    if(req.params.date_string){
-      const date = new Date(req.params.date_string);
-      res.json({"unix": Date.parse(date), "utc": date.toUTCString()})
-    } else if(req.params.date_string === ""){
-      const date = new Date();
-      res.json({"unix": Date.parse(date), "utc": date.toUTCString()})
+    const date = new Date(req.params.date_string);
+    if(Date.parse(date)){      
+      res.json({"unix": Date.parse(date), "utc": date.toUTCString()}) 
     } else {
-      res.json({"error": "Invalid Date"})
+        res.json({"error": "Invalid Date"})
     }
   }  
 );
 
+//timestamp route with no date passed
+app.get("/timestamp/",
+  function(res, req){
+    const date = new Date();
+    res.json({"unix": Date.parse(date), "utc": date.toUTCString()});
+  }
+);
+    
+    
 
 
 // listen for requests :)
