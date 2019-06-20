@@ -26,7 +26,7 @@ app.get("/api/hello", function (req, res) {
 
 //timestamp route with no date passed
 app.get("/timestamp/",
-  function(res, req){
+  function(req, res){
     const date = new Date();
     res.json({"unix": Date.parse(date), "utc": date.toUTCString()});
   }
