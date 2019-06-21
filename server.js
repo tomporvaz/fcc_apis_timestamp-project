@@ -38,11 +38,15 @@ It need to be written into logic so endpoint use appropriate function if a
 timestamp is passed or a string is passed.
 */
 
-app.get("/api/timestamp/:date_string?(\d+)",
+app.get("/api/timestamp/:date_string(\\d+)",
   function (req, res){
     let number = parseInt(req.params.date_string, 10);
     const date = new Date(number);
-    res.json({"unix": Date.parse(date), "utc": date.toUTCString()})
+    if(Date.parse(date)){      
+      res.json({"unix": Date.parse(date), "utc": date.toUTCString()}) 
+    } else {
+        res.json({"error": "Invalid Date"})
+    }
   }
 );
 
