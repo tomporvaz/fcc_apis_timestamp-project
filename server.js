@@ -36,14 +36,17 @@ app.get("/api/timestamp/",
 This function works to parse a UNIX timestamp
 It need to be written into logic so endpoint use appropriate function if a
 timestamp is passed or a string is passed.
+*/
 
-app.get("/api/timestamp/:date_string?",
+app.get("/api/timestamp/:date_string?(\d+)",
   function (req, res){
     let number = parseInt(req.params.date_string, 10);
     const date = new Date(number);
-  res.json({"unix": Date.parse(date), "utc": date.toUTCString()})
+    res.json({"unix": Date.parse(date), "utc": date.toUTCString()})
+  }
+);
 
-*/
+
 
 //timestamp api endpoint
 app.get("/api/timestamp/:date_string?",
